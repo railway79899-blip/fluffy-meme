@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Scratch 完整顯示播放器</title>
+    <style>
+        /* 移除所有邊距 */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #000; /* 背景黑屏，讓鍵盤更明顯 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .wrapper {
+            /* 使用視窗單位確保畫面永遠完整顯示 
+               Scratch 比例為 480x360 (4:3)
+            */
+            width: 100vw;
+            height: 75vw; /* 100 * (3/4) */
+            max-height: 100vh;
+            max-width: 133.33vh; /* 100 * (4/3) */
+            position: relative;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            /* 解決部分瀏覽器渲染模糊問題 */
+            image-rendering: pixelated;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="wrapper">
+        <!-- 
+            加入 &stuck 參數：防止專案腳本因邊界檢測錯誤而「卡住」
+            加入 &fps=60: 讓內置鍵盤反應更靈敏
+        -->
+        <iframe 
+            src="https://turbowarp.org/929570102/embed?autoplay=true&fps=60&interpolation&cq=true&stuck" 
+            allowtransparency="true" 
+            allowfullscreen 
+            allow="autoplay; fullscreen; camera; microphone">
+        </iframe>
+    </div>
+
+</body>
+</html>
